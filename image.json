@@ -2,7 +2,6 @@
   "builders": [
     {
       "type": "googlecompute",
-      "account_file": "/home/julien/.config/gcloud/skazy-terraform-admin.json",
       "project_id": "skazy-terraform-admin",
       "source_image_family": "debian-9",
       "ssh_username": "packer",
@@ -20,7 +19,15 @@
     {
       "type": "file",
       "source": "./bml-server.jar",
-      "destination": "/home/java/bin/jars"
+      "destination": "/tmp/bml-server.jar"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "cp /tmp/bml-server.jar /home/java/bin/jars",
+        "rm toupload/files.tar"
+      ]
     }
+   
   ]
 }
