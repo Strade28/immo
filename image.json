@@ -1,0 +1,26 @@
+{
+  "builders": [
+    {
+      "type": "googlecompute",
+      "account_file": "/home/julien/.config/gcloud/skazy-terraform-admin.json",
+      "project_id": "skazy-terraform-admin",
+      "source_image_family": "debian-9",
+      "ssh_username": "packer",
+      "zone": "australia-southeast1-b",
+      "disk_size": "10",
+      "machine_type": "n1-standard-1"
+
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "salt-masterless",
+      "local_state_tree": "./salt"
+    },
+    {
+      "type": "file",
+      "source": "./bml-server.jar",
+      "destination": "/home/java/bin/jars"
+    }
+  ]
+}
